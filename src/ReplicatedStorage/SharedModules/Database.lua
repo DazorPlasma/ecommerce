@@ -2,7 +2,6 @@
 
 local Database = {}
 
-
 --[=[
 	Returns items that match the given query.
 	If the query is empty, return the current top items.
@@ -36,11 +35,33 @@ local LOCAL_TEMPORARY_ITEMS: {Descriptor} = {
 	}
 }
 
+local function refineQuery(query: string?): string
+	if not query then
+		return ""
+	end
+	-- TODO (remove accents, whitespace, etc)
+	return query
+end
+
+local function matchesQuery(query: string, name: string): boolean
+	return string.find(name, query) ~= nil
+end
+
+
 function Database.newQuery(query: string?): {Descriptor}
+	local refinedQuery = refineQuery(query)
 	local foundItems: {Descriptor} = {}
 	
-	-- TODO; remove this line after database connection is done
-	foundItems = LOCAL_TEMPORARY_ITEMS
+	for _, v in LOCAL_TEMPORARY_ITEMS do
+		if matchesQuery(refinedQuery, v.Name) then
+			table.insert(foundItems, v)
+		end
+	end
+	
+	if #foundItems == 0 then
+		-- TODO: best selling page or whatever
+		foundItems = LOCAL_TEMPORARY_ITEMS
+	end
 	
 	return foundItems
 end
