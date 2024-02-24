@@ -1,0 +1,131 @@
+prezentare
+
+problemă: Recramele online sunt moarte
+soluție: crearea unor jocuri pe platforma "Roblox"
+
+------------------------
+
+[[1]]
+...
+
+[[2]]
+Numărul #1 - Reclamele web sunt *moarte*.
+Înainte de a continua cu prezentarea, vreau să vă pun o întrebare...
+
+[[3]]
+(fade in cu adblock 4 sec)
+...este cineva care nu a auzit de adblock? ...
+(încet): ăla eu, ăla eu-
+OK- probabil vă sună familiar:
+Ne promovăm website-ul, dar puțini dau click. De ce?
+
+[[4]]
+Mulți utilizatori deja filtrează reclamele cu ajutorul
+extensiilor de browser.
+
+[[5]]
+Păi și atunci, cum ne mai promovăm eficient website-ul nostru
+de e-commerce?
+(efect de empatizare): SOLUȚIE:
+
+[[6]]
+Punem reclamele altundeva!
+Acum, desigur că dorim ca acestea să fie cât mai eficiente -
+să ajungă la un număr cât mai mare de persoane -
+pentru asta, promovarea *trebuie* să fie făcută online.
+Dar, *trebuie* să avem o altă abordare.
+
+[[7]]
+Ce vreau să spun? Păi.
+În timp ce vizionați un videoclip pe YouTube,
+
+[[8]]
+s-a întâmplat cumva ca video-ul să conțină...
+...sponsori?
+
+[[9, 10]]
+Hai, câți dintre voi ați auzit măcar de unul dintre aceștia,
+mâna sus!
+(inspir): Deoarece, tehnic vorbind, reclamele nu sunt „reclame”,
+ci un segment implicit în video, pentru o vreme, utilizatorii
+nu puteau să le blocheze, făcândule un mod ideal de promovare!
+
+[[11]]
+Din păcate, odată cu apariția extensei „SponsorBlock”, acest lucru
+nu mai este adevărat.
+
+[[12]]
+De acea, eu propun o nouă modalitate:
+
+[[13]]
+Reclamele sub forma unui joc.
+
+[[14]]
+Numărul #2 - Roblox – platforma viitorului
+Poate că unii dintre noi au auzit deja de această platformă
+Un loc unde oricine își poate crea și publica un joc -
+pe gratis! - Dar este mult mai mult. decât. atât.
+
+[[15]]
+O simplă căutare Google ne dezvăluie că Roblox are
+32 de milioane de utilizatori zilnici - și nu doar copii!
+
+[[16]]
+Recent, platforma a anunțat că încurajează jocuri pentru
+utilizatori de 17 ani și peste. Acest lucru ne demonstrează
+că Roblox nu este doar pentru copii, ci pentru toată lumea.
+De ce este important acest lucru?
+Deoarece înseamnă că printre utilizatori se regăresc și potențiali
+clienți pentru website-ul nostru.
+
+[[17]]
+De aceea, propun crearea unor experiențe virtuale pe respectiva
+platformă care să sponsorizeze website-ul nostru.
+Dar de ce aici, exact?
+Deoarece nu suntem primi - au mai încercat și alții, și le-a mers
+
+[[18]]
+Spre exemplu, în 2022, Spotify a făcut exact acest lucru.
+(https://newsroom.spotify.com/2022-05-03/spotify-island-brings-new-experiences-for-fans-and-artists-to-roblox/)
+(și le-a mers)
+
+[[19]]
+Și reușim și noi?
+Da!
+Roblox este:
+
+[[20]]
+ușor de folosit (limbaj de prog. lua)
+
+[[21]]
+scalabil - servere nelimitate și gratis
+
+[[22]]
+compatibil - Git și Visual Studio Code
+
+[[23]]
+accesibil - toate platformele!
+
+[[24]]
+performat - oceanul ăla e făcut cu multithreading
+
+[[25]]
+Precizări
+
+[[26]]
+reclama (rezultă) utilizatori (rezultă) venit
+
+[[27]]
+eșecul nu este o problemă mare; oprim oricând
+dacă avem parte de succes, putem adăuga microtranzacții
+
+[[28]]
+Prototip
+
+[[29]]
+(video cu prototipul)
+
+------------------------
+
+Q&A pentru juriu:
+TODO
