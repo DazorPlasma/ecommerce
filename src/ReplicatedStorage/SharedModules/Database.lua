@@ -50,17 +50,16 @@ end
 
 function Database.newQuery(query: string?): {Descriptor}
 	local refinedQuery = refineQuery(query)
+	if refinedQuery == "" then
+		return LOCAL_TEMPORARY_ITEMS
+	end
+
 	local foundItems: {Descriptor} = {}
 	
 	for _, v in LOCAL_TEMPORARY_ITEMS do
 		if matchesQuery(refinedQuery, v.Name) then
 			table.insert(foundItems, v)
 		end
-	end
-	
-	if #foundItems == 0 then
-		-- TODO: best selling page or whatever
-		foundItems = LOCAL_TEMPORARY_ITEMS
 	end
 	
 	return foundItems

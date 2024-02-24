@@ -65,7 +65,7 @@ end
 
 local function showQueryResults(query: string)
 	clearItems()
-	local query = trimWhitespace(searchTextBox.Text)
+	query = trimWhitespace(query)
 	local foundItems = Database.newQuery(query)
 	for _, descriptor in foundItems do
 		local newItem = Item.fromItemDescriptor(descriptor)
