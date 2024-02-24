@@ -55,7 +55,7 @@ Din păcate, odată cu apariția extensei „SponsorBlock”, acest lucru
 nu mai este adevărat.
 
 [[12]]
-De acea, eu propun o nouă modalitate:
+De aceea, eu propun o nouă modalitate:
 
 [[13]]
 Reclamele sub forma unui joc.
@@ -80,14 +80,15 @@ clienți pentru website-ul nostru.
 
 [[17]]
 De aceea, propun crearea unor experiențe virtuale pe respectiva
-platformă care să sponsorizeze website-ul nostru.
+platformă în scopul sponsorizării noastre.
 Dar de ce aici, exact?
 Deoarece nu suntem primi - au mai încercat și alții, și le-a mers
 
 [[18]]
 Spre exemplu, în 2022, Spotify a făcut exact acest lucru.
 (https://newsroom.spotify.com/2022-05-03/spotify-island-brings-new-experiences-for-fans-and-artists-to-roblox/)
-(și le-a mers)
+
+*și-au reușit*
 
 [[19]]
 Și reușim și noi?
@@ -104,19 +105,21 @@ scalabil - servere nelimitate și gratis
 compatibil - Git și Visual Studio Code
 
 [[23]]
-accesibil - toate platformele!
+accesibil - este disponibil pe toate platformele!
 
 [[24]]
-performat - oceanul ăla e făcut cu multithreading
+performat - oceanul ăla e făcut cu multithreading,
+într-un limbaj de programare *interpretat*
 
 [[25]]
-Precizări
+Clarificări
 
 [[26]]
 reclama (rezultă) utilizatori (rezultă) venit
 
 [[27]]
-eșecul nu este o problemă mare; oprim oricând
+eșecul nu este o problemă mare; reclama nu necesită
+costuri de rurale*, ne putem opri oricând
 dacă avem parte de succes, putem adăuga microtranzacții
 
 [[28]]
@@ -124,8 +127,3 @@ Prototip
 
 [[29]]
 (video cu prototipul)
-
-------------------------
-
-Q&A pentru juriu:
-TODO

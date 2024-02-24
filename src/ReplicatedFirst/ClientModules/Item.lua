@@ -54,7 +54,11 @@ local function getMainInterface(): typeof(ReplicatedStorage.Assets.UI.MainInterf
 	interfaceCache = lp:WaitForChild("PlayerGui"):WaitForChild("MainInterface")
 	return interfaceCache
 end
+--[=[
+	Creates a new item with the given `itemId`.
 
+	Make sure to destroy only by calling `Item:destroy()`!
+]=]
 function Item.new(itemId: string): Item
 	local itemInfo = Database.getItemInfo(itemId)
 	assert(itemInfo.Price > 0, "Price must be a positive integer!")
@@ -69,6 +73,7 @@ function Item.new(itemId: string): Item
 	self.OnClick = Instance.new("BindableEvent")
 	self.Destroyed = false
 	self.Id = itemId
+	local itemRef = self.Frame.Item
 
 	if itemInfo.Image then
 		assert(type(itemInfo.Image) == "string", "Invalid image id!")
@@ -84,11 +89,11 @@ function Item.new(itemId: string): Item
 			image = "rbxassetid://" .. image
 		end
 		self.Image = image
-		self.Frame.Item.ImageLabel.Image = image
+		itemRef.ImageLabel.Image = image
 	end
 
-	self.Frame.Item.Price.TextLabel.Text = Localization.localCurrency(self.Price)
-	self.Frame.Item.ItemName.Text = self.ItemName
+	itemRef.Price.TextLabel.Text = Localization.localCurrency(self.Price)
+	itemRef.ItemName.Text = self.ItemName
 	self.Frame.Parent = getMainInterface().MainPage.List
 
 	self.Frame.InputBegan:Connect(function(input)

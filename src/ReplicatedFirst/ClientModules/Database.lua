@@ -4,11 +4,6 @@ local QueryStrip = require(ReplicatedFirst.ClientModules.QueryStrip)
 
 local Database = {}
 
---[=[
-	Returns items that match the given query.
-	If the query is empty, return the current top items.
-]=]
-
 export type Descriptor = {
 	Name: string,
 	Image: string,
@@ -17,7 +12,7 @@ export type Descriptor = {
 	Description: string,
 }
 
-local LOCAL_TEMPORARY_ITEMS: { [string]: Descriptor } = {
+local LOCAL_ITEMS: { [string]: Descriptor } = {
 	["shampoo"] = {
 		Name = "Șampon electric",
 		Image = "14319800860",
@@ -48,11 +43,11 @@ end
 function Database.newQuery(query: string?): { [string]: Descriptor }
 	local refinedQuery = QueryStrip.strip(if not query then "" else query)
 	if refinedQuery == "" then
-		return LOCAL_TEMPORARY_ITEMS
+		return LOCAL_ITEMS
 	end
 	local foundItems: { [string]: Descriptor } = {}
 
-	for i, v in LOCAL_TEMPORARY_ITEMS do
+	for i, v in LOCAL_ITEMS do
 		if matchesQuery(refinedQuery, QueryStrip.strip(v.Name)) then
 			foundItems[i] = v
 		end
@@ -61,18 +56,18 @@ function Database.newQuery(query: string?): { [string]: Descriptor }
 	return foundItems
 end
 
-local LOCAL_TEMPORARY_SELLER_HASHMAP = {
+local LOCAL_SELLER_HASHMAP = {
 	[1] = "Admin",
 	[2] = "Tom Beron",
 	[3] = "Ăla-micu'",
 }
 
 function Database.getSellerName(sellerId: number): string
-	return LOCAL_TEMPORARY_SELLER_HASHMAP[sellerId]
+	return LOCAL_SELLER_HASHMAP[sellerId]
 end
 
 function Database.getItemInfo(itemId: string): Descriptor
-	local found = LOCAL_TEMPORARY_ITEMS[itemId]
+	local found = LOCAL_ITEMS[itemId]
 	assert(found, "Item not found!")
 	return found
 end

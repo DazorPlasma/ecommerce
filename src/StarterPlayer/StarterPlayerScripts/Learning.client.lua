@@ -28,63 +28,39 @@ type infoFrameType = typeof(infoFrame)
 
 ContentProvider:PreloadAsync(SoundService:GetChildren())
 camera.CameraType = Enum.CameraType.Scriptable
--- task.spawn(function()
--- 	while task.wait() do
--- 		aux.UIScale.Scale = camera.ViewportSize.X / 1920
--- 	end
--- end)
+
 local function tweenInfoFrameDown(frame: infoFrameType, newText: string)
-	TweenService:Create(frame.UIAspectRatioConstraint, TweenInfo.new(1, Enum.EasingStyle.Quint), { AspectRatio = 3 }):Play()
+	TweenService:Create(
+		frame.UIAspectRatioConstraint,
+		TweenInfo.new(1, Enum.EasingStyle.Quint),
+		{ AspectRatio = 3 }
+	):Play()
 	task.wait(0.2)
 	TweenService:Create(frame.Title, TweenInfo.new(0.3), { TextTransparency = 1 }):Play()
-	TweenService:Create(
-		frame,
-		TweenInfo.new(1),
-		{
-			Size = UDim2.new(0.5, 0, 0.5, 0),
-			Position = UDim2.new(0.5, 0, 0.8, 0)
-		}
-	):Play()
-	TweenService:Create(
-		frame.Description,
-		TweenInfo.new(1),
-		{
-			Size = UDim2.new(0.95, 0, 0.95, 0),
-			Position = UDim2.new(0.5, 0, 0.5, 0),
-		}
-	):Play()
+	TweenService:Create(frame, TweenInfo.new(1), {
+		Size = UDim2.new(0.5, 0, 0.5, 0),
+		Position = UDim2.new(0.5, 0, 0.8, 0),
+	}):Play()
+	TweenService:Create(frame.Description, TweenInfo.new(1), {
+		Size = UDim2.new(0.95, 0, 0.95, 0),
+		Position = UDim2.new(0.5, 0, 0.5, 0),
+	}):Play()
 	task.wait(1)
-	TweenService:Create(
-		frame.Description,
-		TweenInfo.new(0.3),
-		{
-			TextTransparency = 1
-		}
-	):Play()
+	TweenService:Create(frame.Description, TweenInfo.new(0.3), {
+		TextTransparency = 1,
+	}):Play()
 	task.wait(0.35)
 	frame.Description.Text = newText
-	TweenService:Create(
-		frame.Description,
-		TweenInfo.new(0.3),
-		{
-			TextTransparency = 0
-		}
-	):Play()
+	TweenService:Create(frame.Description, TweenInfo.new(0.3), {
+		TextTransparency = 0,
+	}):Play()
 end
 
 local function advanceText(frame: infoFrameType, newText: string)
-	TweenService:Create(
-		frame.Description,
-		TweenInfo.new(0.5),
-		{TextTransparency = 1}
-	):Play()
+	TweenService:Create(frame.Description, TweenInfo.new(0.5), { TextTransparency = 1 }):Play()
 	task.wait(0.5)
 	frame.Description.Text = newText
-	TweenService:Create(
-		frame.Description,
-		TweenInfo.new(0.5),
-		{TextTransparency = 0}
-	):Play()
+	TweenService:Create(frame.Description, TweenInfo.new(0.5), { TextTransparency = 0 }):Play()
 end
 
 local function newInfoFrame(title: string, description: string): infoFrameType
@@ -104,8 +80,7 @@ local function waitContinue()
 end
 
 UserInputService.InputBegan:Connect(function(input)
-	if input.KeyCode == Enum.KeyCode.Return or
-		input.UserInputType == Enum.UserInputType.MouseButton1 then
+	if input.KeyCode == Enum.KeyCode.Return or input.UserInputType == Enum.UserInputType.MouseButton1 then
 		continueEvent:Fire()
 	end
 end)
@@ -123,79 +98,34 @@ tweenInfoFrameDown(lesson1, lesson1Pages[2].Content)
 
 local cam1 = Instance.new("Camera")
 aux.Frame1.ViewportFrame.CurrentCamera = cam1
-cam1.CFrame = CFrame.new(
-	Vector3.new(2.5, 1.3, 0),
-	aux.Frame1.ViewportFrame.Example1.Position
-)
+cam1.CFrame = CFrame.new(Vector3.new(2.5, 1.3, 0), aux.Frame1.ViewportFrame.Example1.Position)
 cam1.Parent = aux.Frame1.ViewportFrame
 
-TweenService:Create(
-	aux.Frame1,
-	TweenInfo.new(0.4),
-	{BackgroundTransparency = 0.5}
-):Play()
-TweenService:Create(
-	aux.Frame1.UIStroke,
-	TweenInfo.new(0.4),
-	{Transparency = 0.2}
-):Play()
-TweenService:Create(
-	aux.Frame1.ViewportFrame,
-	TweenInfo.new(0.4),
-	{ImageTransparency = 0}
-):Play()
+TweenService:Create(aux.Frame1, TweenInfo.new(0.4), { BackgroundTransparency = 0.5 }):Play()
+TweenService:Create(aux.Frame1.UIStroke, TweenInfo.new(0.4), { Transparency = 0.2 }):Play()
+TweenService:Create(aux.Frame1.ViewportFrame, TweenInfo.new(0.4), { ImageTransparency = 0 }):Play()
 
 task.wait(0.5)
 
 local cam2 = Instance.new("Camera")
 aux.Frame2.ViewportFrame.CurrentCamera = cam2
-cam2.CFrame = CFrame.new(
-	Vector3.new(1.8, 1.8, 1.8),
-	aux.Frame2.ViewportFrame.Example2.Position
-)
+cam2.CFrame = CFrame.new(Vector3.new(1.8, 1.8, 1.8), aux.Frame2.ViewportFrame.Example2.Position)
 cam2.Parent = aux.Frame2.ViewportFrame
 
-TweenService:Create(
-	aux.Frame2,
-	TweenInfo.new(0.4),
-	{BackgroundTransparency = 0.5}
-):Play()
-TweenService:Create(
-	aux.Frame2.UIStroke,
-	TweenInfo.new(0.4),
-	{Transparency = 0.2}
-):Play()
-TweenService:Create(
-	aux.Frame2.ViewportFrame,
-	TweenInfo.new(0.4),
-	{ImageTransparency = 0}
-):Play()
+TweenService:Create(aux.Frame2, TweenInfo.new(0.4), { BackgroundTransparency = 0.5 }):Play()
+TweenService:Create(aux.Frame2.UIStroke, TweenInfo.new(0.4), { Transparency = 0.2 }):Play()
+TweenService:Create(aux.Frame2.ViewportFrame, TweenInfo.new(0.4), { ImageTransparency = 0 }):Play()
 
 task.wait(0.5)
 
 local cam3 = Instance.new("Camera")
 aux.Frame3.ViewportFrame.CurrentCamera = cam3
-cam3.CFrame = CFrame.new(
-	Vector3.new(2, 1, 2),
-	aux.Frame3.ViewportFrame.Example3.Position
-)
+cam3.CFrame = CFrame.new(Vector3.new(2, 1, 2), aux.Frame3.ViewportFrame.Example3.Position)
 cam3.Parent = aux.Frame3.ViewportFrame
 
-TweenService:Create(
-	aux.Frame3,
-	TweenInfo.new(0.4),
-	{BackgroundTransparency = 0.5}
-):Play()
-TweenService:Create(
-	aux.Frame3.UIStroke,
-	TweenInfo.new(0.4),
-	{Transparency = 0.2}
-):Play()
-TweenService:Create(
-	aux.Frame3.ViewportFrame,
-	TweenInfo.new(0.4),
-	{ImageTransparency = 0}
-):Play()
+TweenService:Create(aux.Frame3, TweenInfo.new(0.4), { BackgroundTransparency = 0.5 }):Play()
+TweenService:Create(aux.Frame3.UIStroke, TweenInfo.new(0.4), { Transparency = 0.2 }):Play()
+TweenService:Create(aux.Frame3.ViewportFrame, TweenInfo.new(0.4), { ImageTransparency = 0 }):Play()
 
 task.wait(0.5)
 
@@ -209,8 +139,6 @@ aux.Frame2.Visible = false
 aux.Frame3.Visible = false
 playerGui.MainInterface.Enabled = true
 
--- partea 2: ai grija ce cumperi
-
 local function playScene(item: string)
 	local root = localPlayer.Character.HumanoidRootPart
 	camera.CameraType = Enum.CameraType.Scriptable
@@ -221,11 +149,12 @@ local function playScene(item: string)
 
 	task.spawn(function()
 		while not isPackageCollected do
-			TweenService:Create(camera,
-				TweenInfo.new(1/15),
-				{CFrame = CFrame.new(workspace.LessonTwoCamera.Position, root.Position)}
+			TweenService:Create(
+				camera,
+				TweenInfo.new(1 / 15),
+				{ CFrame = CFrame.new(workspace.LessonTwoCamera.Position, root.Position) }
 			):Play()
-			task.wait(1/30)
+			task.wait(1 / 30)
 		end
 	end)
 	SoundService.Bell:Play()
@@ -254,13 +183,14 @@ local function playScene(item: string)
 	SoundService.CloseDoor:Play()
 	task.wait(1)
 
-	if item == "cow" then
-		print("TODO")
+	-- part 2: be careful of your purchase!
+	if item == "cow" or item == "dorito" then
+		error("Prototype doesn't feature this!")
 	elseif item == "shampoo" then
 		local bathWater = workspace.Bath.Water
 		local waterGoalSize = bathWater.Size + Vector3.yAxis * 2
 		local waterGoalPosition = bathWater.Position + Vector3.yAxis
-		
+
 		root.CFrame = workspace.Bath.TubPosition.CFrame
 		camera.CFrame = workspace.ShampScene.CFrame
 		localPlayer.Character.Humanoid.Sit = true
@@ -268,7 +198,7 @@ local function playScene(item: string)
 		TweenService:Create(
 			workspace.Bath.Water,
 			TweenInfo.new(8, Enum.EasingStyle.Linear),
-			{Size = waterGoalSize, Position = waterGoalPosition}
+			{ Size = waterGoalSize, Position = waterGoalPosition }
 		):Play()
 		task.wait(8)
 		SoundService.Waterfill:Stop()
@@ -285,15 +215,13 @@ local function playScene(item: string)
 		workspace.Bath.TubPosition.Electro.Enabled = true
 		task.wait(3)
 		workspace.Bath.TubPosition.Electro.Enabled = false
-		TweenService:Create(Lighting.Blur, TweenInfo.new(1), {Size = 50}):Play()
+		TweenService:Create(Lighting.Blur, TweenInfo.new(1), { Size = 50 }):Play()
 		SoundService.Electric:Stop()
 		SoundService.WompWomp:Play()
 		local shampFail = newInfoFrame(lesson1Pages[4].Title :: string, lesson1Pages[4].Content)
 		waitContinue()
 		shampFail:Destroy()
 		Lighting.Blur.Size = 0
-	elseif item == "dorito" then
-		print("ALSO TODO")
 	else
 		error(`unknown item: {item}`)
 	end
