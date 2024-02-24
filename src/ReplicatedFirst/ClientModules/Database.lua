@@ -50,7 +50,6 @@ function Database.newQuery(query: string?): { [string]: Descriptor }
 	if refinedQuery == "" then
 		return LOCAL_TEMPORARY_ITEMS
 	end
-	print(refinedQuery)
 	local foundItems: { [string]: Descriptor } = {}
 
 	for i, v in LOCAL_TEMPORARY_ITEMS do
