@@ -1,4 +1,6 @@
 --!strict
+local ReplicatedFirst = game:GetService("ReplicatedFirst")
+local QueryStrip = require(ReplicatedFirst.ClientModules.QueryStrip)
 
 local Database = {}
 
@@ -15,53 +17,44 @@ export type Descriptor = {
 	Description: string,
 }
 
-local LOCAL_TEMPORARY_ITEMS: {[string]: Descriptor} = {
+local LOCAL_TEMPORARY_ITEMS: { [string]: Descriptor } = {
 	["ASDSA"] = {
 		Name = "Șampon electric",
 		Image = "14319800860",
 		Price = 175,
 		SellerId = 1,
-		Description = "lorem ipsum est"
+		Description = "lorem ipsum est",
 	},
 	["0xffffff"] = {
 		Name = "Dorito expirat",
 		Image = "1908575682",
 		Price = 17,
 		SellerId = 2,
-		Description = "hello world"
+		Description = "hello world",
 	},
 	["asdfghjkl"] = {
 		Name = "Doamna învățătoare",
 		Image = "13904789599",
 		Price = 2,
 		SellerId = 3,
-		Description = "vă garantez eu că e 100% biodegradabilă"
-	}
+		Description = "vă garantez eu că e 100% biodegradabilă",
+	},
 }
-
-local function refineQuery(query: string?): string
-	if not query then
-		return ""
-	end
-	-- TODO (remove accents, whitespace, etc)
-	return query
-end
 
 local function matchesQuery(query: string, name: string): boolean
 	return string.find(name, query) ~= nil
 end
 
-
-function Database.newQuery(query: string?): {[string]: Descriptor}
-	local refinedQuery = refineQuery(query)
+function Database.newQuery(query: string?): { [string]: Descriptor }
+	local refinedQuery = QueryStrip.strip(if not query then "" else query)
 	if refinedQuery == "" then
 		return LOCAL_TEMPORARY_ITEMS
 	end
-
-	local foundItems: {[string]: Descriptor} = {}
+	print(refinedQuery)
+	local foundItems: { [string]: Descriptor } = {}
 
 	for i, v in LOCAL_TEMPORARY_ITEMS do
-		if matchesQuery(refinedQuery, v.Name) then
+		if matchesQuery(refinedQuery, QueryStrip.strip(v.Name)) then
 			foundItems[i] = v
 		end
 	end
@@ -72,7 +65,7 @@ end
 local LOCAL_TEMPORARY_SELLER_HASHMAP = {
 	[1] = "Admin",
 	[2] = "Tom Beron",
-	[3] = "Ăla-micu'"
+	[3] = "Ăla-micu'",
 }
 
 function Database.getSellerName(sellerId: number): string

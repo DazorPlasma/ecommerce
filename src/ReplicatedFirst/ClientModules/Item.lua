@@ -10,7 +10,7 @@ local HttpService = game:GetService("HttpService")
 --// Modules
 
 local Localization = require(ReplicatedFirst.ClientModules.Localization)
-local Database = require(ReplicatedStorage.SharedModules.Database)
+local Database = require(ReplicatedFirst.ClientModules.Database)
 
 --// Other Variables
 
@@ -44,8 +44,6 @@ type self = {
 
 export type Item = typeof(setmetatable({} :: self, Item))
 
-
-
 local interfaceCache
 --[=[
 	@yields
@@ -72,7 +70,7 @@ function Item.new(itemId: string): Item
 	self.OnClick = Instance.new("BindableEvent")
 	self.Destroyed = false
 	self.Id = HttpService:GenerateGUID()
-	
+
 	if itemInfo.Image then
 		assert(type(itemInfo.Image) == "string", "Invalid image id!")
 		local isOnlyNumber: boolean = false
@@ -84,14 +82,13 @@ function Item.new(itemId: string): Item
 		end)
 		local image = itemInfo.Image
 		if isOnlyNumber then
-			image = "rbxassetid://"..image
+			image = "rbxassetid://" .. image
 		end
 		self.Image = image
 		self.Frame.Item.ImageLabel.Image = image
 	end
-	
-	self.Frame.Item.Price.TextLabel.Text = tostring(self.Price)
-		.. " " .. Localization.getUserCurrency()
+
+	self.Frame.Item.Price.TextLabel.Text = tostring(self.Price) .. " " .. Localization.getUserCurrency()
 	self.Frame.Item.ItemName.Text = self.ItemName
 	self.Frame.Parent = getMainInterface().MainPage.List
 
@@ -102,14 +99,14 @@ function Item.new(itemId: string): Item
 		end
 		self.OnClick:Fire()
 	end)
-	
+
 	self.Frame.TouchTap:Connect(function()
 		if Localization.getPlatform() ~= "Mobile" then
 			warn("User tapped an item but they're not on mobile!")
 		end
 		self.OnClick:Fire()
 	end)
-	
+
 	return self
 end
 

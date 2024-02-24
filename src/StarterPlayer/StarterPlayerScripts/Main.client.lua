@@ -12,7 +12,7 @@ local StarterGui = game:GetService("StarterGui")
 
 local Item = require(ReplicatedFirst.ClientModules.Item)
 local Localization = require(ReplicatedFirst.ClientModules.Localization)
-local Database = require(ReplicatedStorage.SharedModules.Database)
+local Database = require(ReplicatedFirst.ClientModules.Database)
 
 --// Other Variables
 
@@ -42,7 +42,7 @@ local function trimWhitespace(text: string): string
 	return text
 end
 
-local currentItems: {Item.Item} = {}
+local currentItems: { Item.Item } = {}
 local function clearItems()
 	for _, v in currentItems do
 		v:destroy()
@@ -96,6 +96,7 @@ local function showQueryResults(query: string)
 	clearItems()
 	query = trimWhitespace(query)
 	local foundItems = Database.newQuery(query)
+	print(foundItems)
 	for itemId, _ in foundItems do
 		local newItem = Item.new(itemId)
 		table.insert(currentItems, newItem)
@@ -108,10 +109,8 @@ local function showQueryResults(query: string)
 	end
 end
 
-searchTextBox.InputBegan:Connect(function(input)
-	if input.KeyCode == Enum.KeyCode.Return then
-		showQueryResults(searchTextBox.Text)
-	end
+searchTextBox.FocusLost:Connect(function()
+	showQueryResults(searchTextBox.Text)
 end)
 
 gui.Parent = playerGui
