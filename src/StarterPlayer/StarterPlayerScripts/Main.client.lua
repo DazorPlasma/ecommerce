@@ -16,7 +16,7 @@ local Database = require(ReplicatedStorage.SharedModules.Database)
 --// Other Variables
 
 local gui = ReplicatedStorage.Assets.UI.MainInterface:Clone()
-local searchTextBox = gui.Back.Search.TextBox
+local searchTextBox = gui.MainPage.Search.TextBox
 local lp = Players.LocalPlayer
 local playerGui = lp:WaitForChild("PlayerGui")
 

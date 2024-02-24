@@ -82,7 +82,7 @@ function Item.new(name: string, price: number, image: string?): Item
 	self.Frame.Item.Price.TextLabel.Text = tostring(price)
 		.. " " .. Localization.getUserCurrency()
 	self.Frame.Item.ItemName.Text = name
-	self.Frame.Parent = getMainInterface().Back.List
+	self.Frame.Parent = getMainInterface().MainPage.List
 
 	self.Frame.InputBegan:Connect(function(input)
 		local isMouseClick = input.UserInputType == Enum.UserInputType.MouseButton1
