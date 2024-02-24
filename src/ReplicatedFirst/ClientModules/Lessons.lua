@@ -25,14 +25,18 @@ Lessons.Names[2] = "Bitcoin"
 Lessons.Pages[1] = {
 	{
 		Title = "Ce este magazinul digital?",
-		Content = "Un magazin digital este un site web ce vinde produse sau servicii prin internet. Un magazin digital are avantajul de a ajunge la mai mulți clienți, de a reduce costurile operaționale și de a oferi o experiență personalizată pentru fiecare cumpărător"
+		Content = "Magazinul digital reprezintă un site web ce vinde produse sau servicii prin internet. Acesta are avantajul de a ajunge la mai mulți clienți, de a reduce costurile operaționale și de a oferi o experiență personalizată pentru fiecare cumpărător."
 	},
 	{
-		Content = "aici poți să faci nuștuce"
+		Content = "Aici, utilizatori pot adesea să cumpere sau să vândă diferite lucruri: haine, bijuterii, jucării, decorațiuni, etc."
 	},
 	{
 		Content = "Hai să vedem cum poți folosi un astfel de magazin!"
-	}
+	},
+	{
+		Title = "Ai grijă ce cumperi online!",
+		Content = "Poate fi periculos, lorem ipsum, ălea ălea etc"
+	},
 }
 
 

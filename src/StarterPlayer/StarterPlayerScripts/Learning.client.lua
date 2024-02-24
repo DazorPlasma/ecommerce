@@ -2,6 +2,7 @@
 
 --// Services
 
+local Lighting = game:GetService("Lighting")
 local TweenService = game:GetService("TweenService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ReplicatedFirst = game:GetService("ReplicatedFirst")
@@ -17,6 +18,7 @@ local Lessons = require(ReplicatedFirst.ClientModules.Lessons)
 
 local localPlayer = Players.LocalPlayer
 local playerGui = localPlayer.PlayerGui
+local aux = playerGui:WaitForChild("Aux")
 local camera = workspace.CurrentCamera
 local infoFrame = ReplicatedStorage.Assets.UI.InfoFrame
 type infoFrameType = typeof(infoFrame)
@@ -24,7 +26,11 @@ type infoFrameType = typeof(infoFrame)
 --// Main Code
 
 camera.CameraType = Enum.CameraType.Scriptable
-
+-- task.spawn(function()
+-- 	while task.wait() do
+-- 		aux.UIScale.Scale = camera.ViewportSize.X / 1920
+-- 	end
+-- end)
 local function tweenInfoFrameDown(frame: infoFrameType, newText: string)
 	TweenService:Create(frame.UIAspectRatioConstraint, TweenInfo.new(1, Enum.EasingStyle.Quint), { AspectRatio = 3 }):Play()
 	task.wait(0.2)
@@ -83,7 +89,7 @@ local function newInfoFrame(title: string, description: string): infoFrameType
 	local newFrame = infoFrame:Clone()
 	newFrame.Title.Text = title
 	newFrame.Description.Text = description
-	newFrame.Parent = playerGui.Aux
+	newFrame.Parent = aux
 	return newFrame
 end
 
@@ -109,15 +115,97 @@ Lessons.showLesson(1)
 local lesson1Pages = Lessons.Pages[1]
 
 task.wait(1)
-local testFrame = newInfoFrame(lesson1Pages[1].Title :: string, lesson1Pages[1].Content)
+local lesson1 = newInfoFrame(lesson1Pages[1].Title :: string, lesson1Pages[1].Content)
 waitContinue()
-tweenInfoFrameDown(testFrame, lesson1Pages[2].Content)
-waitContinue()
-advanceText(testFrame, lesson1Pages[3].Content)
-waitContinue()
-testFrame:Destroy()
-playerGui.MainInterface.Enabled = true
+tweenInfoFrameDown(lesson1, lesson1Pages[2].Content)
 
+local cam1 = Instance.new("Camera")
+aux.Frame1.ViewportFrame.CurrentCamera = cam1
+cam1.CFrame = CFrame.new(
+	Vector3.new(2.5, 1.3, 0),
+	aux.Frame1.ViewportFrame.Example1.Position
+)
+cam1.Parent = aux.Frame1.ViewportFrame
+
+TweenService:Create(
+	aux.Frame1,
+	TweenInfo.new(0.4),
+	{BackgroundTransparency = 0.5}
+):Play()
+TweenService:Create(
+	aux.Frame1.UIStroke,
+	TweenInfo.new(0.4),
+	{Transparency = 0.2}
+):Play()
+TweenService:Create(
+	aux.Frame1.ViewportFrame,
+	TweenInfo.new(0.4),
+	{ImageTransparency = 0}
+):Play()
+
+task.wait(0.5)
+
+local cam2 = Instance.new("Camera")
+aux.Frame2.ViewportFrame.CurrentCamera = cam2
+cam2.CFrame = CFrame.new(
+	Vector3.new(1.8, 1.8, 1.8),
+	aux.Frame2.ViewportFrame.Example2.Position
+)
+cam2.Parent = aux.Frame2.ViewportFrame
+
+TweenService:Create(
+	aux.Frame2,
+	TweenInfo.new(0.4),
+	{BackgroundTransparency = 0.5}
+):Play()
+TweenService:Create(
+	aux.Frame2.UIStroke,
+	TweenInfo.new(0.4),
+	{Transparency = 0.2}
+):Play()
+TweenService:Create(
+	aux.Frame2.ViewportFrame,
+	TweenInfo.new(0.4),
+	{ImageTransparency = 0}
+):Play()
+
+task.wait(0.5)
+
+local cam3 = Instance.new("Camera")
+aux.Frame3.ViewportFrame.CurrentCamera = cam3
+cam3.CFrame = CFrame.new(
+	Vector3.new(2, 1, 2),
+	aux.Frame3.ViewportFrame.Example3.Position
+)
+cam3.Parent = aux.Frame3.ViewportFrame
+
+TweenService:Create(
+	aux.Frame3,
+	TweenInfo.new(0.4),
+	{BackgroundTransparency = 0.5}
+):Play()
+TweenService:Create(
+	aux.Frame3.UIStroke,
+	TweenInfo.new(0.4),
+	{Transparency = 0.2}
+):Play()
+TweenService:Create(
+	aux.Frame3.ViewportFrame,
+	TweenInfo.new(0.4),
+	{ImageTransparency = 0}
+):Play()
+
+task.wait(0.5)
+
+waitContinue()
+advanceText(lesson1, lesson1Pages[3].Content)
+waitContinue()
+lesson1:Destroy()
+aux.StartFill.Visible = false
+aux.Frame1.Visible = false
+aux.Frame2.Visible = false
+aux.Frame3.Visible = false
+playerGui.MainInterface.Enabled = true
 
 -- partea 2: ai grija ce cumperi
 
@@ -159,20 +247,51 @@ local function playScene(item: string)
 	until isPackageCollected
 	task.wait(0.5)
 	localPlayer.Character.Humanoid:MoveTo(workspace.LessonTwoDoorPlayerPosition.Position)
-	task.wait(2)
+	task.wait(1.5)
 	workspace.Door.Transparency = 0
 	SoundService.CloseDoor:Play()
 	task.wait(1)
 
 	if item == "cow" then
-		-- todo
-		wait(0.12)
+		print("TODO")
 	elseif item == "shampoo" then
-		-- todo
-		wait()
+		local bathWater = workspace.Bath.Water
+		local waterGoalSize = bathWater.Size + Vector3.yAxis * 2
+		local waterGoalPosition = bathWater.Position + Vector3.yAxis
+		
+		root.CFrame = workspace.Bath.TubPosition.CFrame
+		camera.CFrame = workspace.ShampScene.CFrame
+		localPlayer.Character.Humanoid.Sit = true
+		SoundService.Waterfill:Play()
+		TweenService:Create(
+			workspace.Bath.Water,
+			TweenInfo.new(8, Enum.EasingStyle.Linear),
+			{Size = waterGoalSize, Position = waterGoalPosition}
+		):Play()
+		task.wait(8)
+		SoundService.Waterfill:Stop()
+		task.wait(0.5)
+		workspace.ShampProp:MoveTo(Vector3.new(-49.677, 3.369, 51.668))
+		SoundService.TaDa:Play()
+		task.wait(1)
+		SoundService.TaDa:Stop()
+		workspace.ShampProp:SetPrimaryPartCFrame(workspace.DrinkShampPos.CFrame)
+		SoundService.ShampDrink:Play()
+		task.wait(1)
+		SoundService.ShampDrink:Stop()
+		SoundService.Electric:Play()
+		workspace.Bath.TubPosition.Electro.Enabled = true
+		task.wait(3)
+		workspace.Bath.TubPosition.Electro.Enabled = false
+		TweenService:Create(Lighting.Blur, TweenInfo.new(1), {Size = 50}):Play()
+		SoundService.Electric:Stop()
+		SoundService.WompWomp:Play()
+		local shampFail = newInfoFrame(lesson1Pages[4].Title :: string, lesson1Pages[4].Content)
+		waitContinue()
+		shampFail:Destroy()
+		Lighting.Blur.Size = 0
 	elseif item == "dorito" then
-		-- todo
-		wait(0.1)
+		print("ALSO TODO")
 	else
 		error(`unknown item: {item}`)
 	end

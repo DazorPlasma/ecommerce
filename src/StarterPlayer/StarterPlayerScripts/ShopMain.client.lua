@@ -86,7 +86,6 @@ end)
 local function showQueryResults(query: string)
 	clearItems()
 	local foundItems = Database.newQuery(query)
-	print(foundItems)
 	for itemId, _ in foundItems do
 		local newItem = Item.new(itemId)
 		table.insert(currentItems, newItem)
