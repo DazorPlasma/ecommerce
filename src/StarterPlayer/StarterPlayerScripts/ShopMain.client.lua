@@ -50,11 +50,6 @@ local function loadProductPage(item: Item.Item)
 	productPage.ItemInfo.Item.Description.Text = item.Description
 end
 
-productPage.ItemInfo.Buy.TextButton.MouseButton1Click:Connect(function()
-	-- TODO
-	print("TODO")
-end)
-
 local isViewingItem: boolean = false
 local currentView: Item.Item?
 local function viewItem(item: Item.Item)
@@ -80,6 +75,12 @@ end
 
 productPage.BackButton.TextButton.MouseButton1Click:Connect(function()
 	unviewItem()
+end)
+
+local buyBindable = ReplicatedStorage.Bindables.ItemBought
+productPage.ItemInfo.Buy.TextButton.MouseButton1Click:Connect(function()
+	assert(currentView, "Tried to buy item without selecting one!")
+	buyBindable:Fire(currentView.Id)
 end)
 
 local function showQueryResults(query: string)

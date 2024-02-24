@@ -18,21 +18,21 @@ export type Descriptor = {
 }
 
 local LOCAL_TEMPORARY_ITEMS: { [string]: Descriptor } = {
-	["ASDSA"] = {
+	["shampoo"] = {
 		Name = "Șampon electric",
 		Image = "14319800860",
 		Price = 43.75,
 		SellerId = 1,
 		Description = "lorem ipsum est",
 	},
-	["0xffffff"] = {
+	["dorito"] = {
 		Name = "Dorito expirat",
 		Image = "1908575682",
 		Price = 4.25,
 		SellerId = 2,
 		Description = "hello world",
 	},
-	["asdfghjkl"] = {
+	["cow"] = {
 		Name = "Doamna învățătoare",
 		Image = "13904789599",
 		Price = 0.5,

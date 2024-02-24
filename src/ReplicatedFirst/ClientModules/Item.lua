@@ -5,7 +5,6 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ReplicatedFirst = game:GetService("ReplicatedFirst")
 local Players = game:GetService("Players")
-local HttpService = game:GetService("HttpService")
 
 --// Modules
 
@@ -69,7 +68,7 @@ function Item.new(itemId: string): Item
 	self.Description = itemInfo.Description
 	self.OnClick = Instance.new("BindableEvent")
 	self.Destroyed = false
-	self.Id = HttpService:GenerateGUID()
+	self.Id = itemId
 
 	if itemInfo.Image then
 		assert(type(itemInfo.Image) == "string", "Invalid image id!")
