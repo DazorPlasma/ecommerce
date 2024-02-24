@@ -9,6 +9,7 @@ local ReplicatedFirst = game:GetService("ReplicatedFirst")
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local SoundService = game:GetService("SoundService")
+local ContentProvider = game:GetService("ContentProvider")
 
 --// Modules
 
@@ -25,6 +26,7 @@ type infoFrameType = typeof(infoFrame)
 
 --// Main Code
 
+ContentProvider:PreloadAsync(SoundService:GetChildren())
 camera.CameraType = Enum.CameraType.Scriptable
 -- task.spawn(function()
 -- 	while task.wait() do
