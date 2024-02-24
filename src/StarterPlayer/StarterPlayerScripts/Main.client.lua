@@ -11,12 +11,15 @@ local StarterGui = game:GetService("StarterGui")
 --// Modules
 
 local Item = require(ReplicatedFirst.ClientModules.Item)
+local Localization = require(ReplicatedFirst.ClientModules.Localization)
 local Database = require(ReplicatedStorage.SharedModules.Database)
 
 --// Other Variables
 
 local gui = ReplicatedStorage.Assets.UI.MainInterface:Clone()
-local searchTextBox = gui.MainPage.Search.TextBox
+local mainPage = gui.MainPage
+local productPage = gui.ProductPage
+local searchTextBox = mainPage.Search.TextBox
 local lp = Players.LocalPlayer
 local playerGui = lp:WaitForChild("PlayerGui")
 
@@ -46,29 +49,55 @@ local function clearItems()
 	end
 end
 
+local productPageItem = productPage.ItemContainer.Item
+local function loadProductPage(item: Item.Item)
+	productPageItem.Price.TextLabel.Text = tostring(item.Price) .. " " .. Localization.getUserCurrency()
+	productPageItem.ImageLabel.Image = item.Image
+	productPageItem.ItemName.Text = item.ItemName
+	productPageItem.SellerName.Text = Database.getSellerName(item.SellerId)
+
+	productPage.ItemInfo.Item.Description.Text = item.Description
+end
+
+productPage.ItemInfo.Buy.TextButton.MouseButton1Click:Connect(function()
+	-- TODO
+	print("TODO")
+end)
+
 local isViewingItem: boolean = false
-local currentView = "TODO"
+local currentView: Item.Item?
 local function viewItem(item: Item.Item)
 	if isViewingItem then
 		warn("Can't view item, already viewing one!")
 		return
 	end
 	isViewingItem = true
+	currentView = item
+	loadProductPage(item)
+	productPage.Visible = true
+	mainPage.Visible = false
 	-- TODO
 end
 
 local function unviewItem()
-	assert(currentView ~= nil, "Can't unview since no view is open!")
+	assert(currentView, "Can't unview since no view is open!")
 	assert(isViewingItem == true, "Can't unview; isViewingItem = false")
-	-- TODO
+	currentView = nil
+	isViewingItem = false
+	mainPage.Visible = true
+	productPage.Visible = false
 end
+
+productPage.BackButton.TextButton.MouseButton1Click:Connect(function()
+	unviewItem()
+end)
 
 local function showQueryResults(query: string)
 	clearItems()
 	query = trimWhitespace(query)
 	local foundItems = Database.newQuery(query)
-	for _, descriptor in foundItems do
-		local newItem = Item.fromItemDescriptor(descriptor)
+	for itemId, _ in foundItems do
+		local newItem = Item.new(itemId)
 		table.insert(currentItems, newItem)
 		newItem.OnClick.Event:Connect(function()
 			if isViewingItem then

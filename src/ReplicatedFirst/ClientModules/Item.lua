@@ -5,6 +5,7 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local ReplicatedFirst = game:GetService("ReplicatedFirst")
 local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
 
 --// Modules
 
@@ -32,9 +33,13 @@ Item.__index = Item
 type self = {
 	ItemName: string,
 	Price: number,
+	Description: string,
+	Image: string?,
 	Frame: typeof(itemFrame),
+	SellerId: number,
 	OnClick: BindableEvent,
-	Destroyed: boolean
+	Destroyed: boolean,
+	Id: string,
 }
 
 export type Item = typeof(setmetatable({} :: self, Item))
@@ -53,35 +58,41 @@ local function getMainInterface(): typeof(ReplicatedStorage.Assets.UI.MainInterf
 	return interfaceCache
 end
 
-function Item.new(name: string, price: number, image: string?): Item
-	assert(price > 0, "Price must be a positive integer!")
-	assert(string.len(name) <= ITEM_NAME_MAX_LENGTH, "Item name too long!")
+function Item.new(itemId: string): Item
+	local itemInfo = Database.getItemInfo(itemId)
+	assert(itemInfo.Price > 0, "Price must be a positive integer!")
+	assert(string.len(itemInfo.Name) <= ITEM_NAME_MAX_LENGTH, "Item name too long!")
 
 	local self = setmetatable({} :: self, Item)
 	self.Frame = itemFrame:Clone()
-	self.ItemName = name
-	self.Price = price
+	self.ItemName = itemInfo.Name
+	self.Price = itemInfo.Price
+	self.SellerId = itemInfo.SellerId
+	self.Description = itemInfo.Description
 	self.OnClick = Instance.new("BindableEvent")
 	self.Destroyed = false
+	self.Id = HttpService:GenerateGUID()
 	
-	if image then
-		assert(type(image) == "string", "Invalid image id!")
+	if itemInfo.Image then
+		assert(type(itemInfo.Image) == "string", "Invalid image id!")
 		local isOnlyNumber: boolean = false
 		pcall(function()
-			local possible = tonumber(image)
+			local possible = tonumber(itemInfo.Image)
 			if possible then
 				isOnlyNumber = true
 			end
 		end)
+		local image = itemInfo.Image
 		if isOnlyNumber then
 			image = "rbxassetid://"..image
 		end
+		self.Image = image
 		self.Frame.Item.ImageLabel.Image = image
 	end
 	
-	self.Frame.Item.Price.TextLabel.Text = tostring(price)
+	self.Frame.Item.Price.TextLabel.Text = tostring(self.Price)
 		.. " " .. Localization.getUserCurrency()
-	self.Frame.Item.ItemName.Text = name
+	self.Frame.Item.ItemName.Text = self.ItemName
 	self.Frame.Parent = getMainInterface().MainPage.List
 
 	self.Frame.InputBegan:Connect(function(input)
@@ -102,9 +113,14 @@ function Item.new(name: string, price: number, image: string?): Item
 	return self
 end
 
-function Item.fromItemDescriptor(descriptor: Database.Descriptor): Item
-	return Item.new(descriptor.Name, descriptor.Price, descriptor.Image)
-end
+-- function Item.fromItemDescriptor(descriptor: Database.Descriptor): Item
+-- 	return Item.new(
+-- 		descriptor.Name,
+-- 		descriptor.Price,
+-- 		descriptor.SellerId,
+-- 		descriptor.Image
+-- 	)
+-- end
 
 function Item.destroy(self: Item)
 	self.Destroyed = true

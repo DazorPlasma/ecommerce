@@ -12,26 +12,30 @@ export type Descriptor = {
 	Image: string,
 	Price: number,
 	SellerId: number,
+	Description: string,
 }
 
-local LOCAL_TEMPORARY_ITEMS: {Descriptor} = {
-	{
+local LOCAL_TEMPORARY_ITEMS: {[string]: Descriptor} = {
+	["ASDSA"] = {
 		Name = "Șampon electric",
 		Image = "14319800860",
 		Price = 175,
-		SellerId = 2,
+		SellerId = 1,
+		Description = "lorem ipsum est"
 	},
-	{
+	["0xffffff"] = {
 		Name = "Dorito expirat",
 		Image = "1908575682",
 		Price = 17,
-		SellerId = 3,
+		SellerId = 2,
+		Description = "hello world"
 	},
-	{
+	["asdfghjkl"] = {
 		Name = "Doamna învățătoare",
 		Image = "13904789599",
 		Price = 2,
 		SellerId = 3,
+		Description = "vă garantez eu că e 100% biodegradabilă"
 	}
 }
 
@@ -48,20 +52,20 @@ local function matchesQuery(query: string, name: string): boolean
 end
 
 
-function Database.newQuery(query: string?): {Descriptor}
+function Database.newQuery(query: string?): {[string]: Descriptor}
 	local refinedQuery = refineQuery(query)
 	if refinedQuery == "" then
 		return LOCAL_TEMPORARY_ITEMS
 	end
 
-	local foundItems: {Descriptor} = {}
-	
-	for _, v in LOCAL_TEMPORARY_ITEMS do
+	local foundItems: {[string]: Descriptor} = {}
+
+	for i, v in LOCAL_TEMPORARY_ITEMS do
 		if matchesQuery(refinedQuery, v.Name) then
-			table.insert(foundItems, v)
+			foundItems[i] = v
 		end
 	end
-	
+
 	return foundItems
 end
 
@@ -72,8 +76,13 @@ local LOCAL_TEMPORARY_SELLER_HASHMAP = {
 }
 
 function Database.getSellerName(sellerId: number): string
-	-- TODO
 	return LOCAL_TEMPORARY_SELLER_HASHMAP[sellerId]
+end
+
+function Database.getItemInfo(itemId: string): Descriptor
+	local found = LOCAL_TEMPORARY_ITEMS[itemId]
+	assert(found, "Item not found!")
+	return found
 end
 
 return Database
