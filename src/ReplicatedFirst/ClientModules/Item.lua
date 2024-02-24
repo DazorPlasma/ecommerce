@@ -88,7 +88,7 @@ function Item.new(itemId: string): Item
 		self.Frame.Item.ImageLabel.Image = image
 	end
 
-	self.Frame.Item.Price.TextLabel.Text = tostring(self.Price) .. " " .. Localization.getUserCurrency()
+	self.Frame.Item.Price.TextLabel.Text = Localization.localCurrency(self.Price)
 	self.Frame.Item.ItemName.Text = self.ItemName
 	self.Frame.Parent = getMainInterface().MainPage.List
 
@@ -109,15 +109,6 @@ function Item.new(itemId: string): Item
 
 	return self
 end
-
--- function Item.fromItemDescriptor(descriptor: Database.Descriptor): Item
--- 	return Item.new(
--- 		descriptor.Name,
--- 		descriptor.Price,
--- 		descriptor.SellerId,
--- 		descriptor.Image
--- 	)
--- end
 
 function Item.destroy(self: Item)
 	self.Destroyed = true

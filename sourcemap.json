@@ -1,1 +1,75 @@
-{"name":"project","className":"DataModel","filePaths":["default.project.json"],"children":[{"name":"ReplicatedFirst","className":"ReplicatedFirst","children":[{"name":"ClientModules","className":"Folder","filePaths":["src/ReplicatedFirst\\ClientModules\\init.meta.json"],"children":[{"name":"Item","className":"ModuleScript","filePaths":["src/ReplicatedFirst\\ClientModules\\Item.lua"]},{"name":"Localization","className":"ModuleScript","filePaths":["src/ReplicatedFirst\\ClientModules\\Localization.lua"]},{"name":"Database","className":"ModuleScript","filePaths":["src/ReplicatedFirst\\ClientModules\\Database.lua"]},{"name":"QueryStrip","className":"ModuleScript","filePaths":["src/ReplicatedFirst\\ClientModules\\QueryStrip.lua"]}]}]},{"name":"ReplicatedStorage","className":"ReplicatedStorage"},{"name":"StarterPlayer","className":"StarterPlayer","children":[{"name":"StarterPlayerScripts","className":"StarterPlayerScripts","children":[{"name":"Main","className":"LocalScript","filePaths":["src/StarterPlayer/StarterPlayerScripts\\Main.client.lua"]}]}]}]}
+{
+    "name": "project",
+    "className": "DataModel",
+    "filePaths": [
+        "default.project.json"
+    ],
+    "children": [
+        {
+            "name": "ReplicatedFirst",
+            "className": "ReplicatedFirst",
+            "children": [
+                {
+                    "name": "ClientModules",
+                    "className": "Folder",
+                    "filePaths": [
+                        "src/ReplicatedFirst\\ClientModules\\init.meta.json"
+                    ],
+                    "children": [
+                        {
+                            "name": "Item",
+                            "className": "ModuleScript",
+                            "filePaths": [
+                                "src/ReplicatedFirst\\ClientModules\\Item.lua"
+                            ]
+                        },
+                        {
+                            "name": "Localization",
+                            "className": "ModuleScript",
+                            "filePaths": [
+                                "src/ReplicatedFirst\\ClientModules\\Localization.lua"
+                            ]
+                        },
+                        {
+                            "name": "Database",
+                            "className": "ModuleScript",
+                            "filePaths": [
+                                "src/ReplicatedFirst\\ClientModules\\Database.lua"
+                            ]
+                        },
+                        {
+                            "name": "QueryStrip",
+                            "className": "ModuleScript",
+                            "filePaths": [
+                                "src/ReplicatedFirst\\ClientModules\\QueryStrip.lua"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "ReplicatedStorage",
+            "className": "ReplicatedStorage"
+        },
+        {
+            "name": "StarterPlayer",
+            "className": "StarterPlayer",
+            "children": [
+                {
+                    "name": "StarterPlayerScripts",
+                    "className": "StarterPlayerScripts",
+                    "children": [
+                        {
+                            "name": "Main",
+                            "className": "LocalScript",
+                            "filePaths": [
+                                "src/StarterPlayer/StarterPlayerScripts\\Main.client.lua"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

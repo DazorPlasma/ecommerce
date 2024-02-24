@@ -33,15 +33,6 @@ if possibleDebugInterface then
 	possibleDebugInterface:Destroy()
 end
 
-local function trimWhitespace(text: string): string
-	if type(text) ~= "string" then
-		warn(`Invalid text received! Type: {typeof(text)}`)
-		return ""
-	end
-	-- TODO
-	return text
-end
-
 local currentItems: { Item.Item } = {}
 local function clearItems()
 	for _, v in currentItems do
@@ -51,7 +42,7 @@ end
 
 local productPageItem = productPage.ItemContainer.Item
 local function loadProductPage(item: Item.Item)
-	productPageItem.Price.TextLabel.Text = tostring(item.Price) .. " " .. Localization.getUserCurrency()
+	productPageItem.Price.TextLabel.Text = Localization.localCurrency(item.Price)
 	productPageItem.ImageLabel.Image = item.Image
 	productPageItem.ItemName.Text = item.ItemName
 	productPageItem.SellerName.Text = Database.getSellerName(item.SellerId)
@@ -76,7 +67,6 @@ local function viewItem(item: Item.Item)
 	loadProductPage(item)
 	productPage.Visible = true
 	mainPage.Visible = false
-	-- TODO
 end
 
 local function unviewItem()
@@ -94,7 +84,6 @@ end)
 
 local function showQueryResults(query: string)
 	clearItems()
-	query = trimWhitespace(query)
 	local foundItems = Database.newQuery(query)
 	print(foundItems)
 	for itemId, _ in foundItems do
