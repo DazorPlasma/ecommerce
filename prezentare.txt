@@ -99,7 +99,7 @@ Roblox este:
 ușor de folosit (limbaj de prog. lua)
 
 [[21]]
-scalabil - servere nelimitate și gratis
+scalabil - servere nelimitate și gratuite
 
 [[22]]
 compatibil - Git și Visual Studio Code
